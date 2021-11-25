@@ -5,6 +5,7 @@
   "main": "application.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "seed-db": "cd seed && node seedDB.js",
     "start": "node application.js",
     "dev": "nodemon application.js"
   },

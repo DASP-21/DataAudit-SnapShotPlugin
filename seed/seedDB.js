@@ -4,7 +4,7 @@ const CDC = require('../model/cdc.model');
 const MONGO_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.s6a4p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 
 mongoose.connect(MONGO_URI, () =>
-	console.log(`[*]Seed Connection established.`)
+	console.log(`[*]SEED DB Connection Established: @`)
 )
 let seedCount = 0;
 const updateDatabase = async ()=>{

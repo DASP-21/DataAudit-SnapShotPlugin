@@ -14,10 +14,13 @@ connectDB();
 Custom API to record data changes and write to changelog DB.
 Something similar to Version Control needs to be implemented.
 */
+
 // Middlewares
-const logRoutes = require('./routes/log.route');
 app.use(express.json());
 app.use(cors());
+
+// Routes
+const logRoutes = require('./routes/log.route');
 app.use('/api', logRoutes);
 
 
