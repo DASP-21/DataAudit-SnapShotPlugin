@@ -7,7 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node application.js",
     "dev": "nodemon application.js"
+  },  
+  "bugs": {
+    "url": "https://github.com/H2H-DASP/DataAudit-SnapShotPlugin/issues"
   },
+  "homepage": "https://github.com/H2H-DASP/DataAudit-SnapShotPlugin",
   "keywords": [
     "data-audit",
     "Nodejs",
