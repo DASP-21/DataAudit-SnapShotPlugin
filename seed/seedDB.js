@@ -1,7 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose")
 const CDC = require('../model/cdc.model');
-const MONGO_URI =   process.env.MONGO_URI || `mongodb://localhost:27017/test-cdc`
+const MONGO_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.s6a4p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 
 mongoose.connect(MONGO_URI, () =>
 	console.log(`[*]Seed Connection established.`)
@@ -9,7 +9,7 @@ mongoose.connect(MONGO_URI, () =>
 let seedCount = 0;
 const updateDatabase = async ()=>{
     try{
-        for(let x = 0;x<100;x++){
+        for(let x = 0;x<5;x++){
         let newLog = {
             data_id: 100+x,
             timestamp: Date.now(),
