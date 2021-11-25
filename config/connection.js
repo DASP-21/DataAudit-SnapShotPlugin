@@ -1,5 +1,5 @@
 const mongoose = require(`mongoose`)
-const MONGO_URI =   process.env.MONGO_URI || `mongodb://localhost:27017/test-cdc`
+const MONGO_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.s6a4p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 
 const connectDB = async () => {
     try {
