@@ -9,3 +9,6 @@ test/*.log
 
 # Environment Variables.
 .env
+
+# Disable routes
+/disabledFeatures
