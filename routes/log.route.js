@@ -31,6 +31,25 @@ router.get("/getlog/:data_id", async (req, res) => {
     }
 });
 
+router.get("/capturehistory/:data_id", async(req,res) => {
+    const data_id = req.params.data_id;
+
+    try{
+        const log = await CDC.find({ data_id: data_id });
+        const changelog = await ChangeLog.findById(log[0].change_log);
+    
+        res.status(200).json({
+            result: "success",            
+            capturehistory: changelog
+        })
+    }
+    catch (err) {
+        res.status(500).json({
+            message: err.message,            
+        });
+    }
+})
+
 // POST : /updatelog
 
 router.post("/createlog", async (req, res) => {
