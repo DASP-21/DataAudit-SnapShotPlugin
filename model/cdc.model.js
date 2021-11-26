@@ -17,14 +17,19 @@ let cdcSchema = new Schema({
         default: Date.now()
     },
     content: String,
-    change_log:[{
-        version: Number,
-        timestamp:{
-             type: Date,
-             default: Date.now()
-        },
-        content: String //FOR COMPRESSED BINARY
-    }]   
+    // change_log:[{
+    //     version: Number,
+    //     timestamp:{
+    //          type: Date,
+    //          default: Date.now()
+    //     },
+    //     content: String //FOR COMPRESSED BINARY
+    // }]
+    
+    change_log:{
+        type: Schema.Types.ObjectId,
+        ref: 'ChangeLog',
+    }
 });
 
 
