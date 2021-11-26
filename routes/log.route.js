@@ -39,14 +39,20 @@ router.post("/createlog", async (req, res) => {
     // check
     const datalog = await CDC.findOne({ data_id: new_id });
     if (datalog) {
+        const newChangeLog = await ChangeLog.findOne({ cdcId: datalog._id })
+
         const changeLog = {
-            version: new_id + (datalog.change_log.length + 1),
+            version: new_id + (newChangeLog.change_log.length + 1),
             content: datalog.content,
         };
-        datalog.change_log.push(changeLog);
+
+        newChangeLog.change_log.push(changeLog);
         datalog.content = newcontent;
         datalog
             .save()
+            .then(result => {
+                return newChangeLog.save();
+            })
             .then((result) => {
                 res.status(200).json({
                     message: "[*]Data History Captured",
@@ -55,7 +61,7 @@ router.post("/createlog", async (req, res) => {
             })
             .catch((err) => {
                 res.status(500).json({
-                    message: "Something went wrong",
+                    message: err.message,
                     result: "error",
                 });
             });
