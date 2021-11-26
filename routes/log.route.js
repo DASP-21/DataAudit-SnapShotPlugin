@@ -98,36 +98,5 @@ router.get('/*', (req,res)=>{
     result: `error`
   });
 })
-/****************************************************************************************************************/ 
-/* Temporary Feature for our DASP Service */ 
-// Disable Data Capture for a specific data_id
-// router.get('/preventlog/:data_id', async(req,res)=>{
-//   const data_id = req.params.data_id;
-//   const log = await CDC.find({ data_id: data_id })
-//   if(log){
-//     log.is_active = !log.is_active;
-//     log
-//    .save()
-//    .then((result) => {
-//         res.status(200).json({
-//           message: `[*]Datalog #${datalog.data_id} has been disabled.`,
-//           result: "success",
-//         });
-//       })
-//     .catch((err) => {
-//         res.status(500).json({
-//           message: err.message,
-//           result: "error",
-//         });
-//     });
-//   }else{
-//     // Invalid Data_id
-//     res.status(400).json({
-//       message: `[*]Datalog #${datalog.data_id} does not exist.`,
-//       result: "failure",
-//     })
-//    }
-//   
-// })
 
 module.exports = router;
