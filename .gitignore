@@ -9,3 +9,7 @@ test/*.log
 
 # Environment Variables.
 .env
+
+#files
+input.txt
+output.txt.gz

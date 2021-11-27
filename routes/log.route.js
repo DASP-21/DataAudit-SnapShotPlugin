@@ -1,5 +1,6 @@
 require("dotenv").config();
 const fs = require('fs');
+const zlib = require('zlib');
 const express = require("express");
 const router = express.Router();
 const CDC = require("../model/cdc.model");
@@ -70,12 +71,20 @@ router.post("/createlog", async (req, res) => {
 
         const newData = newChangeLog.change_log.toString();
 
+        //writing logs to file
         fs.writeFile('./input.txt',newData,(err)=>{
             if(err){
                 return console.log(err);
             }
         })
 
+        //compressing the file
+        const gzip = zlib.createGzip();
+        const r = fs.createReadStream('./input.txt');
+        const w = fs.createWriteStream('./output.txt.gz');
+        r.pipe(gzip).pipe(w);
+
+        //pushing the content to database
         datalog.content = newcontent;
         datalog
             .save()
