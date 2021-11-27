@@ -1,4 +1,5 @@
 require("dotenv").config();
+const fs = require('fs');
 const express = require("express");
 const router = express.Router();
 const CDC = require("../model/cdc.model");
@@ -66,6 +67,15 @@ router.post("/createlog", async (req, res) => {
         };
 
         newChangeLog.change_log.push(changeLog);
+
+        const newData = newChangeLog.change_log.toString();
+
+        fs.writeFile('./input.txt',newData,(err)=>{
+            if(err){
+                return console.log(err);
+            }
+        })
+
         datalog.content = newcontent;
         datalog
             .save()
