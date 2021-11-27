@@ -11,4 +11,5 @@ test/*.log
 .env
 
 # Disabled
+.vscode/
 /disabledFeatures
