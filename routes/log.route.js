@@ -11,8 +11,9 @@ router.get("/getlog", async (req, res) => {
         res.status(200).json(all_log);
     } catch (err) {
         res.status(500).json({
+            status: 500,
             message: err.message,
-            path: "/api/getlog",
+            result: `server error`,
         });
     }
 });
@@ -20,19 +21,29 @@ router.get("/getlog", async (req, res) => {
 router.get("/getlog/:data_id", async (req, res) => {
     try {
         const data_id = req.params.data_id;
+        
+        if(isNaN(data_id)){
+            return res.status(400).json({
+                status: 400,
+                message: `${data_id} is not valid data_id.`,
+                result: 'error'
+            });
+        }
+
         const log = await CDC.findOne({ data_id: data_id });
 
         res.status(200).json(log);
     } catch (err) {
         res.status(500).json({
+            status: 500,
             message: err.message,
-            path: `/api/getlog/${data_id}`,
+            result: `server error`,
         });
     }
 });
 
-// GET : /capturehistory/"data_id"
-router.get("/capturehistory/:data_id", async(req,res) => {
+// GET : /getcapturehistory/:data_id
+router.get("/getcapturehistory/:data_id", async(req,res) => {
     const data_id = req.params.data_id;
 
     try{
@@ -50,8 +61,7 @@ router.get("/capturehistory/:data_id", async(req,res) => {
     }
 })
 
-// POST : /updatelog
-
+// POST : /createlog
 router.post("/createlog", async (req, res) => {
     const new_id = req.body.id;
     const newcontent = req.body.content;
