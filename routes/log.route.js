@@ -20,7 +20,7 @@ router.get("/getlog", async (req, res) => {
 router.get("/getlog/:data_id", async (req, res) => {
     try {
         const data_id = req.params.data_id;
-        const log = await CDC.find({ data_id: data_id });
+        const log = await CDC.findOne({ data_id: data_id });
 
         res.status(200).json(log);
     } catch (err) {
@@ -31,16 +31,16 @@ router.get("/getlog/:data_id", async (req, res) => {
     }
 });
 
+// GET : /capturehistory/"data_id"
 router.get("/capturehistory/:data_id", async(req,res) => {
     const data_id = req.params.data_id;
 
     try{
-        const log = await CDC.find({ data_id: data_id });
-        const changelog = await ChangeLog.findById(log[0].change_log);
+        const log = await CDC.findOne({ data_id: data_id }).populate('change_log');        
     
         res.status(200).json({
             result: "success",            
-            capturehistory: changelog
+            capturehistory: log
         })
     }
     catch (err) {
