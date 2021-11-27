@@ -31,8 +31,19 @@ router.get("/getlog/:data_id", async (req, res) => {
         }
 
         const log = await CDC.findOne({ data_id: data_id });
-
-        res.status(200).json(log);
+        if(log!==null){
+            res.status(200).json({
+                status: 200,
+                message: `Log for ${data_id}`,
+                result: log
+            });
+        }else{
+            res.status(404).json({
+                status: 404,
+                message: `No Log Found`,
+                result: {}
+            });
+        }
     } catch (err) {
         res.status(500).json({
             status: 500,
@@ -48,15 +59,25 @@ router.get("/getcapturehistory/:data_id", async(req,res) => {
 
     try{
         const log = await CDC.findOne({ data_id: data_id }).populate('change_log');        
-    
-        res.status(200).json({
-            result: "success",            
-            capturehistory: log
-        })
+        if(log !== null){
+            res.status(200).json({
+                status: 200,
+                message: "success",            
+                result: log
+            })
+        }else{
+            res.status(400).json({
+                status: 400,
+                message: `No Capture log found.`,
+                result: {}
+            })
+        }
     }
     catch (err) {
         res.status(500).json({
-            message: err.message,            
+            status: 500,
+            message: err.message,
+            result: {}            
         });
     }
 })
