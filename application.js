@@ -17,7 +17,7 @@ Custom API to record data changes and write to changelog DB.
 
 // Static Files
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 
 // Middlewares
 app.use(express.json());
