@@ -88,8 +88,21 @@ router.get("/getcapturehistory/:data_id", async(req,res) => {
 router.post("/createlog", async (req, res) => {
     const new_id = req.body.id;
     const newcontent = req.body.content;
-    // check
+
     const datalog = await CDC.findOne({ data_id: new_id });
+    // prevent change log if it has been disabled
+    if(datalog){
+        if(datalog.is_active === false){
+            res.status(405).json({
+                status:405,
+                message: `Data Item ${new_id} has been disabled from our service`,
+                result: `Failed`
+            });
+            return;
+        }
+    }
+    
+
     if (datalog) {
         const newChangeLog = await ChangeLog.findOne({ cdcId: datalog._id })
 
@@ -124,12 +137,14 @@ router.post("/createlog", async (req, res) => {
             })
             .then((result) => {
                 res.status(200).json({
-                    message: "[*]Data History Captured",
+                    status:200,
+                    message: `Data History Captured for Item ${new_id}`,
                     result: "success",
                 });
             })
             .catch((err) => {
                 res.status(500).json({
+                    status:500,
                     message: err.message,
                     result: "error",
                 });
@@ -162,17 +177,62 @@ router.post("/createlog", async (req, res) => {
             })
             .then((result) => {
                 res.status(200).json({
-                    message: "Log created successfully",
+                    status:200,
+                    message: `Log for ${new_id} created successfully`,
                     result: "success",                    
                 });
             })
             .catch((err) => {
                 res.status(500).json({
+                    status: 500,
                     message: err.message,
                     result: "error",
                 });
             });
     }
 });
+// Disable Data Capture
+router.put('/togglelog/:data_id', async(req,res)=>{
+    const data_id = req.params.data_id;
+    try{
+        const log = await CDC.findOne({data_id: data_id});
+        if(log){
+            log.is_active = !log.is_active;
+            log.save();
+            res.status(200).json({
+                status: 200,
+                message: `Data Capture for Item ${data_id} is now ${log.is_active? 'Enabled' : 'Disabled'}`,
+                result: `success`
+            })
+        }else{
+            res.status(404).json({
+                status:404,
+                message: `Data Item ${data_id} is not identified by the system`,
+                result: `Failed`
+            })
+        }
+    }catch(err){
+        console.log(err);
+    }
+});
+
+// Any Other Invalid Route request to be prevented:
+router.get('/*', (req,res)=>{
+    res.status(404).json({
+        status:404,
+        message: `Invalid GET request`,
+        result: {}
+    })
+});
+
+router.post('/*', (req,res)=>{
+    res.status(404).json({
+        status:404,
+        message: `Invalid POST request`,
+        result: {}
+    })
+});
+
+
 
 module.exports = router;
