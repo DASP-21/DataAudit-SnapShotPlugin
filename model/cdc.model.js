@@ -29,6 +29,10 @@ let cdcSchema = new Schema({
     change_log:{
         type: Schema.Types.ObjectId,
         ref: 'ChangeLog',
+    },
+    is_active: {
+        type: Boolean,
+        default: true,
     }
 });
 
