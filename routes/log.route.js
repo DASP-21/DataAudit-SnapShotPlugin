@@ -55,6 +55,26 @@ router.get("/getlog/:data_id", async (req, res) => {
     }
 });
 
+// Get logs based on entity
+router.get("/getlogentity/:entity", async(req, res) => {
+    const newentity = req.params.entity;
+
+    try{
+        const Datalog = await CDC.find({entity: newentity});
+        res.status(200).json({
+            message: Datalog,
+            result: "success",
+        })
+    }
+    catch(err)
+    {
+        res.status(500).json({            
+            message: err.message,
+            result: `server error`,
+        });
+    }
+})
+
 // GET : /getcapturehistory/:data_id
 router.get("/getcapturehistory/:data_id", async(req,res) => {
     const data_id = req.params.data_id;
