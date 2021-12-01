@@ -88,6 +88,7 @@ router.get("/getcapturehistory/:data_id", async(req,res) => {
 router.post("/createlog", async (req, res) => {
     const new_id = req.body.id;
     const newcontent = req.body.content;
+    const newentity = req.body.entity;
 
     const datalog = await CDC.findOne({ data_id: new_id });
     // prevent change log if it has been disabled
@@ -109,6 +110,7 @@ router.post("/createlog", async (req, res) => {
         const changeLog = {
             version: new_id + (newChangeLog.change_log.length + 1),
             content: datalog.content,
+            entity: datalog.entity ?? '',
         };
 
         newChangeLog.change_log.push(changeLog);
@@ -155,6 +157,7 @@ router.post("/createlog", async (req, res) => {
             data_id: new_id,
             timestamp: Date.now(),
             content: newcontent,
+            entity: newentity,
         });
         newLog
             .save()

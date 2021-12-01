@@ -16,6 +16,12 @@ let cdcSchema = new Schema({
         type: Date,
         default: Date.now()
     },
+
+    entity: {
+        type: String,
+        default: '',
+    },
+
     content: String,
     // change_log:[{
     //     version: Number,

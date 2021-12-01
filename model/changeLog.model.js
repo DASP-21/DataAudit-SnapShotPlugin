@@ -14,7 +14,12 @@ let changeLogSchema = new Schema({
                 type: Date,
                 default: Date.now()
         },
-        content: String //FOR COMPRESSED BINARY
+        content: String, //FOR COMPRESSED BINARY
+
+        entity: {
+            type: String,
+            default: '',
+        },
     }]
 
 })
