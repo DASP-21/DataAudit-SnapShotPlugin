@@ -17,11 +17,11 @@ This plugin captures changes on data item over time. A user can register the dat
 ### Initial Set-up
 
 * Clone this repository
-  * `git clone https://github.com/H2H-DASP/DataAudit-SnapShotPlugin.git`
+  `git clone https://github.com/H2H-DASP/DataAudit-SnapShotPlugin.git`
 *  Install dependencies
-  * `npm i --save`
+  `npm i --save`
 *  Run the development server
-  * `npm run dev`
+  `npm run dev`
 
 ### Service Endpoints
 
