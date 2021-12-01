@@ -219,6 +219,28 @@ router.put('/togglelog/:data_id', async(req,res)=>{
     }
 });
 
+//Disable Data Capture for a particular entity
+router.put('/togglelogentity/:entity', async(req,res) => {
+    const entity_to_toggle = req.params.entity;
+    const newisactive = req.body.enable_history;
+
+    console.log("new "+ typeof(newisactive));
+    
+    CDC.updateMany({entity: entity_to_toggle}, {is_active: newisactive})
+    .then(result => {
+        res.status(200).json({
+            message: `Data Capture for entity ${entity_to_toggle} is now ${(newisactive == 'true')? 'Enabled' : 'Disabled'}`,
+            result: `success`
+        })
+    })
+    .catch(err => {
+        res.status(500).json({            
+            message: err.message,
+            result: "error",
+        });
+    })
+})
+
 // Any Other Invalid Route request to be prevented:
 router.get('/*', (req,res)=>{
     res.status(404).json({
