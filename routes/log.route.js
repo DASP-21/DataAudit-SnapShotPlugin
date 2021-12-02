@@ -246,12 +246,11 @@ router.put('/togglelogentity/:entity', async(req,res) => {
     const entity_to_toggle = req.params.entity;
     const newisactive = req.body.enable_history;
 
-    console.log("new "+ typeof(newisactive));
     
     CDC.updateMany({entity: entity_to_toggle}, {is_active: newisactive})
     .then(result => {
         res.status(200).json({
-            message: `Data Capture for entity ${entity_to_toggle} is now ${(newisactive == 'true')? 'Enabled' : 'Disabled'}`,
+            message: `Data Capture for entity ${entity_to_toggle} is now ${(newisactive)? 'Enabled' : 'Disabled'}`,
             result: `success`
         })
     })
