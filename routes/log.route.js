@@ -62,15 +62,17 @@ router.get("/getlogentity/:entity", async(req, res) => {
     try{
         const Datalog = await CDC.find({entity: newentity});
         res.status(200).json({
-            message: Datalog,
-            result: "success",
+            status: 200,
+            message: `Logs for entity ${newentity}`,
+            result: Datalog,
         })
     }
     catch(err)
     {
-        res.status(500).json({            
+        res.status(500).json({   
+            status:500,         
             message: err.message,
-            result: `server error`,
+            result: {},
         });
     }
 })
@@ -130,7 +132,7 @@ router.post("/createlog", async (req, res) => {
         const changeLog = {
             version: new_id + (newChangeLog.change_log.length + 1),
             content: datalog.content,
-            entity: datalog.entity ?? '',
+            entity: datalog.entity ? datalog.entity : '',
         };
 
         newChangeLog.change_log.push(changeLog);
