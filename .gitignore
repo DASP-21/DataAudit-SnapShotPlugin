@@ -13,6 +13,7 @@ test/*.log
 # Disabled
 .vscode/
 /disabledFeatures
+DASP.md
 #files
 input.txt
 output.txt.gz
