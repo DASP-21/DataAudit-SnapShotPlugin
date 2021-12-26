@@ -105,6 +105,8 @@ DASP plugin exposes simple HTTP endpoints to register client's data items and ca
 
 ### Release
 **[View Release](https://dasp-service.herokuapp.com/ "Data Audit & Snapshot Service Prototype")**
+### Maintainer
+**[Akash Chouhan](https://github.com/akashchouhan16 "Akash Chouhan")**, **[Kanishk Gupta](https://github.com/kanishkguptagit "Kanishk Gupta")**
 ### License
 
 **[MIT](https://github.com/H2H-DASP/DataAudit-SnapShotPlugin " LICENSE")**
