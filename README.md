@@ -1,10 +1,23 @@
-# Data Audit and SnapShot Service
+<center>
 
-The **Data Audit and Snapshot Plugin** (DASP) is a **Node.js** application that provides a easy to use pluggable utility to study the genealogy of data as it gets created, stored, modified, deleted and analysed on a recurring basis.
+![Data Audit & SnapShot Service](./assets/Project%20Banner.png "Data Audit & SnapShot Service")
 
-## About DASP
-DASP plugin exposes simple HTTP endpoints to register client's data items and captures changes on data item over time. A user can register the data item and view all changes on it over time. The user can view either all changes or modifications for a time stamp or filter it to view only the changes done by the specific user. 
-The plugin also supports toggle functionality for capture of data history based on **data category** (`user defined entity classification`) or based on the **unique ID** for the specific data item.
+</center>
+
+# Data Audit and SnapShot Plugin
+
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-Yes-8ebb9c.svg)](https://github.com/H2H-DASP/DataAudit-SnapShotPlugin "Repo Maintained")
+[![Ask Us Anything !](https://img.shields.io/badge/Ask%20Us-Anything-1abc9c.svg)](https://GitHub.com/akashchouhan16/ "github.com/akashchouhan16")
+[![made-for-Developers](https://img.shields.io/badge/Made%20for-Developers-426658.svg)](https://code.visualstudio.com/ "VSCODE")
+[![GitHub issues](https://img.shields.io/github/issues/akashchouhan16/Crypto-Dash.svg)](https://github.com/H2H-DASP/DataAudit-SnapShotPlugin/issues) ![GitHub last commit](https://img.shields.io/github/last-commit/H2H-DASP/DataAudit-SnapShotPlugin.svg) 
+
+
+The **Data Audit and Snapshot Plugin** (DASP) is a **Node.js** application that provides an easy to use, web-based utility to study the genealogy of data as it gets created, stored, modified, deleted and analysed on a recurring basis.
+
+## 💭 About The Service
+DASP plugin exposes simple HTTP endpoints to register client's data items and captures changes on data item over time. The client can register the data item and view all changes on it. The clients have the option to either view all the changes made to their data or be able to view the audit history for the same, based on the time stamp.
+* It also includes the ability to add a filter to view the capture history based on categories. 
+* The plugin also supports toggle functionality to enable/disable CDC on specific items based on the **data category** (`user defined entity classification`) or based on the **unique ID** for a specific data item.
 
 ### Project Stack
 * Node.js
@@ -13,7 +26,7 @@ The plugin also supports toggle functionality for capture of data history based 
 * MongoDB Atlas
   
 --- 
-## Developer environment Set-up
+## Developer Environment Set-up
 * Make sure, the following are installed in the local system.
   * `Node` and `npm`
   * `mongodb`
@@ -40,6 +53,7 @@ The plugin also supports toggle functionality for capture of data history based 
     /api/createlog
     ```
   * Once client's data item is registered, it can be identified by a **data_id** which is unique for every data item registered on DASP.
+  * ![Register Client's Data](./assets/create_log.gif "Register Client's Data")
 
 ---
 
@@ -48,6 +62,8 @@ The plugin also supports toggle functionality for capture of data history based 
         ```
         /api/getlog/:data_id
         ```
+   
+   * ![Get Current State of Client's Data](./assets/getlog_dataid.gif "Get Current State of Client's Data")
 ---
 * To fetch all registerd data items with the current state along with last updated time stamp. (For development purpose only)
   * Make a `GET` request to our service
@@ -55,23 +71,45 @@ The plugin also supports toggle functionality for capture of data history based 
     /api/getlog
     ```
 ---
-* To fetch the Audit History for your data, captured by the service
+* To fetch the **audit history** for your data, captured by the service
   * Make a `GET` request to our service with the **data_id**. 
     ```
     /api/getcapturehistory/:data_id
     ```
   * The endpoint will provide all the different versions of your data.
+  
+  * ![Get Capture history for Audit](./assets/getcapturehistory_dataid.gif "Get Capture history for Audit")
 ---
 * To toggle Data Capturing of your data item
   * Make a `PUT` request to the service with your **data_id**. 
     ```
     /api/togglelog/:data_id
     ```
+  * ![Toggle Service on the client's Data](assets/toggle_cdc_data_id.gif "Toggle Service on the client's Data")
   * The toggle feature allows the client to **enable/disable Capture Data Change (CDC) service** for the specified data item.
   * Make a `PUT` request to the service with your data **entity**.
     ```
     /api/toggleentitylog/:entity
     ```
+  * ![](assets/toggle_cdc_based_on_entity.gif "Toggle service based on the classified \"entity\"")
   * This feature will allow the client to  **enable/disable Capture Data Change (CDC) service** for a data category on our service, specified by the `entity` attribute.
 ---
  
+## [Application Info](https://github.com/H2H-DASP/DataAudit-SnapShotPlugin "Project Details")
+
+> Note: This is a prototype application to provide a web based CDC service.
+> 
+### Version
+
+**[1.0.2](https://github.com/akashchouhan16/KeepNotes_API "API Version")**
+
+### Release
+**[View Release](https://dasp-service.herokuapp.com/ "Data Audit & Snapshot Service Prototype")**
+### License
+
+**[MIT](https://github.com/H2H-DASP/DataAudit-SnapShotPlugin " LICENSE")**
+
+All rights reserved. Copyright (c) **DASP Team**.
+
+[![forthebadge](https://forthebadge.com/images/badges/cc-0.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
+
